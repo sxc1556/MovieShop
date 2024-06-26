@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using ApplicaitonCore.Contracts.Services;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using MovieShopMVC.Models;
@@ -7,11 +8,17 @@ namespace MovieShopMVC.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly IMovieService _movieService;
     
+    public HomeController( IMovieService movieService)
+    {
+        _movieService = movieService;
+    }
+    [HttpGet]
     public IActionResult Index()
     {
-        var movieService = new MovieService();
-        var movies = movieService.GetTop30GrossingMovies();
+        // var movieService = new MovieService();
+        var movies = _movieService.GetTop30GrossingMovies();
         return View(movies);
     }
 
@@ -27,7 +34,7 @@ public class HomeController : Controller
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    public IActionResult Error() 
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
