@@ -24,5 +24,7 @@ public class Movie
     public string? CreatedBy { get; set; }
 
     public decimal? Rating { get; set; }
-
+    //navigation property is collection of trailers
+    public ICollection<Trailer> Trailers { get; set; }
+    public ICollection<MovieGenre> Genres { get; set; }
 }

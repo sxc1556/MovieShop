@@ -9,4 +9,7 @@ public class Genre
     
     [MaxLength(64)]
     public string Name { get; set; }
+    //navigation property
+    public ICollection<MovieGenre> Movies { get; set; }
+    
 }
